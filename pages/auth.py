@@ -1,9 +1,12 @@
+from playwright.sync_api import Page, expect
+
 class Auth:
     def __init__(self, page):
         self.enterEmailTextBox = page.get_by_role("textbox", name="Enter mobile number or email")
         self.continueBtn = page.get_by_role("button", name="Continue")
         self.password = page.get_by_role("textbox", name="Password")
-        self.signInBtn = page.get_by_role("button", name="Sign in", exact=True)
+        self.signInBtnLocator = page.get_by_role("button", name="Sign in", exact=True)
+        self.inCorrectPw = page.get_by_text("Your password is incorrect")
 
     def enterEmail(self, userEmail):
         self.enterEmailTextBox.fill(userEmail)
@@ -11,8 +14,11 @@ class Auth:
     def clickOnContinue(self):
         self.continueBtn.click()
 
-    def fillPassword(self):
-        self.password.fill("Shakti123")
+    def fillPassword(self, userPw):
+        self.password.fill(userPw)
 
     def signInBtn(self):
-        self.signInBtn.click()
+        self.signInBtnLocator.click()
+
+    def validateIncorrectPwMsg(self):
+        expect(self.inCorrectPw).to_be_visible()
