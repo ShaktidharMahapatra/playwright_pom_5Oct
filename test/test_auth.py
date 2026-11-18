@@ -21,7 +21,7 @@ def test_validateNegativeLogin(page: Page, amazonNavigation):
     HomePageObj.clickOnAccountNdList()
     AuthObj.enterEmail("shakti.jeetu123@gmail.com")
     AuthObj.clickOnContinue()
-    AuthObj.fillPassword("Shakti123")
+    AuthObj.fillPassword("Shakt123")
     AuthObj.signInBtn()
     AuthObj.validateIncorrectPwMsg()
 
